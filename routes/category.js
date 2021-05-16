@@ -8,8 +8,8 @@ const router = express.Router();
 const { create, getCategoryById, read } = require('../controllers/category');
 
 router.post('/category/create/:userId', protect, isAuth, isAdmin, create);
+router.get('/category/:categoryId', read);
 
-router.get('/category/:categoryid', protect, isAuth, isAdmin, read);
 
 router.param('categoryId', getCategoryById);
 router.param('userId', getUserById);
