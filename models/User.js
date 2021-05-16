@@ -5,7 +5,6 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        trim: true,
         maxLength: 32,
     },
     email: {
@@ -47,7 +46,7 @@ userSchema.methods = {
     authenticate: function (plainPassword) {
         return this.encryptPassword(plainPassword) === this.hashed_password;
     },
-    
+
     encryptPassword: function encryptPassword(password) {
         if (!password) return '';
         try {
