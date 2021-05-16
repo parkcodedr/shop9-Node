@@ -4,7 +4,7 @@ const expressJWT = require('express-jwt');
 const { errorHandler } = require('../helpers/dbErrorHandler');
 
 function generateAccessToken(id) {
-    return jwt.sign({ _id: id }, process.env.JWT_SECRET, { expiresIn: '1800s' });
+    return jwt.sign({ _id: id }, process.env.JWT_SECRET, { expiresIn: '43200s' });
 }
 exports.signup = (req, res) => {
     const user = new User(req.body);
@@ -64,7 +64,6 @@ exports.protect = (req, res, next) => {
 
 exports.isAuth = (req, res, next) => {
     let user = req.profile && req.user && req.profile._id == req.user._id;
-    console.log(req.profile);
     if (!user) {
         return res.status(403).json({ error: "Access denied" });
     }

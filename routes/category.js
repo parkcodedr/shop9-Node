@@ -5,11 +5,13 @@ const router = express.Router();
 
 
 
-const { create } = require('../controllers/category');
+const { create, getCategoryById, read } = require('../controllers/category');
 
-router.post('/category/create/:userId', protect, isAuth, create);
+router.post('/category/create/:userId', protect, isAuth, isAdmin, create);
 
+router.get('/category/:categoryid', protect, isAuth, isAdmin, read);
 
+router.param('categoryId', getCategoryById);
 router.param('userId', getUserById);
 
 

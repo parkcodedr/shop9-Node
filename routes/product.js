@@ -5,12 +5,16 @@ const router = express.Router();
 
 
 
-const { create } = require('../controllers/category');
+const { create, getProductById, read, remove, update } = require('../controllers/product');
 
-router.post('/product/create/:userId', protect, isAuth, create);
+router.post('/product/create/:userId', protect, isAuth, isAdmin, create);
+router.get('/product/:productId', read);
+router.delete('/product/:productId/:userId', protect, isAuth, isAdmin, remove);
+router.put('/product/:productId/:userId', protect, isAuth, isAdmin, update);
 
 
 router.param('userId', getUserById);
+router.param('productId', getProductById);
 
 
 module.exports = router;
