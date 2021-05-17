@@ -120,6 +120,17 @@ exports.list = (req, res) => {
         })
 
 }
+/**
+ * return a product base on the request product category
+ * other product that has thesame category will be retunred
+ */
 exports.listRelatedProducts = (req, res) => {
-
+    let limit = req.query.limit ? Number(req.query.limit) : 6;
+    Product.find({ _id: { $ne: req.product }, category: req.product.category })
+        .limit(limit).populate('category', '_id name').exec()
+        .then(products => {
+            return res.status(200).json({ products });
+        }).catch(err => {
+            res.status(400).json({ error: "Products not found" + err });
+        })
 }
