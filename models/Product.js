@@ -19,12 +19,16 @@ const productSchema = new mongoose.Schema({
     },
     category: {
         type: ObjectId,
-        ref: 'Category',
+        ref: 'Categories',
         required: true,
         maxLength: 32,
     },
     quantity: {
         type: Number,
+    },
+    sold: {
+        type: Number,
+        default: 0
     },
     photo: {
         data: Buffer,
@@ -35,7 +39,9 @@ const productSchema = new mongoose.Schema({
         required: false,
     },
 
+
 }
+    , { timestamps: true }
 )
 
 module.exports = mongoose.model('Products', productSchema);

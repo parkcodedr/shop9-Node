@@ -5,12 +5,14 @@ const router = express.Router();
 
 
 
-const { create, getProductById, read, remove, update } = require('../controllers/product');
+const { create, getProductById, read, remove, update, list, listRelatedProducts } = require('../controllers/product');
 
 router.post('/product/create/:userId', protect, isAuth, isAdmin, create);
 router.get('/product/:productId', read);
 router.delete('/product/:productId/:userId', protect, isAuth, isAdmin, remove);
 router.put('/product/:productId/:userId', protect, isAuth, isAdmin, update);
+router.get('/products', list);
+router.get('/products/related/:productId', listRelatedProducts);
 
 
 router.param('userId', getUserById);

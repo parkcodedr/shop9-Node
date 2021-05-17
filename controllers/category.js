@@ -28,3 +28,30 @@ exports.create = (req, res) => {
 exports.read = (req, res) => {
     res.json(req.category);
 }
+exports.update = (req, res) => {
+    const category = req.category;
+    category.name = req.body.name;
+    category.save().then(data => {
+        return res.json({ data });
+    }).catch(err => {
+        return res.status(400).json({ error: errorHandler(err) });
+    })
+
+}
+
+exports.remove = (req, res) => {
+    const category = req.category;
+    category.remove().then(data => {
+        return res.json({ message: "Category deleted" });
+    }).catch(err => {
+        return res.status(400).json({ error: errorHandler(err) });
+    })
+}
+exports.list = (req, res) => {
+    Category.find().then(data => {
+        res.json(data);
+    }).catch(err => {
+        return res.status(400).json({ error: errorHandler(err) })
+    });
+
+}
