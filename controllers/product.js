@@ -171,3 +171,10 @@ exports.listBySearch = (req, res) => {
             res.status(400).json({ error: "Products not found" + err });
         })
 }
+exports.getProductPhoto = (req, res, next) => {
+    if (req.product.photo.data) {
+        res.set("Content-Type", res.product.photo.contentType);
+        res.send(req.product.photo.data)
+    }
+    next();
+}
