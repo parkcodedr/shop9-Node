@@ -17,7 +17,8 @@ router.get('/products', list);
 router.get('/products/related/:productId', listRelatedProducts);
 router.get('/products/categories', listProductCategories);
 router.post('/products/by/search', listBySearch);
-router.get('/products/photo/productId', getProductPhoto);
+
+router.get('/products/photo/:productId', getProductPhoto);
 
 router.param('userId', getUserById);
 router.param('productId', getProductById);

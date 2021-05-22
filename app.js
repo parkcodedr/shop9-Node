@@ -12,14 +12,17 @@ const productRoute = require('./routes/product');
 
 const cookieParser = require('cookie-parser');
 const session = require("express-session");
+const cors = require('cors');
 const app = express();
 
 //midlewares
+app.use(cors());
 app.use(session({
     secret: 'asdf;lkjh3lkjh235l23h5l235kjh',
     resave: true,
     saveUninitialized: false
 }));
+
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

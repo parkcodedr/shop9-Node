@@ -173,7 +173,7 @@ exports.listBySearch = (req, res) => {
 }
 exports.getProductPhoto = (req, res, next) => {
     if (req.product.photo.data) {
-        res.set("Content-Type", res.product.photo.contentType);
+        res.set("Content-Type", req.product.photo.contentType);
         res.send(req.product.photo.data)
     }
     next();

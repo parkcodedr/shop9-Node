@@ -2,15 +2,12 @@ const express = require('express');
 const router = express.Router();
 
 const { protect, isAdmin, isAuth } = require('../controllers/auth');
-const { getUserById } = require('../controllers/user');
+const { getUserById, update, read } = require('../controllers/user');
 
 
-router.get("/user/:userId", protect, isAdmin, (req, res) => {
-    console.log(req.params);
-    res.json({
-        user: req.profile
-    })
-})
+router.get("/user/:userId", protect, isAuth, read);
+router.put("/user/:userId", protect, isAuth, update);
+
 
 router.param('userId', getUserById);
 
